@@ -10,6 +10,7 @@ SRC_DIR := ./lib_linear_reg/srcs
 SRC := $(SRC_DIR)/train.c
 SRC += $(SRC_DIR)/matrix.c
 SRC += $(SRC_DIR)/matrix_multiplication.c
+SRC += $(SRC_DIR)/gradient_descent.c
 
 OBJ_DIR := ./lib_linear_reg/obj
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

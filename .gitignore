@@ -3,3 +3,4 @@ __pycache__
 lib_linear_reg.so
 *dSYM
 regress
+out

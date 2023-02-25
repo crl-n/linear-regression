@@ -8,7 +8,8 @@ INCL := -I./lib_linear_reg/includes
 
 SRC_DIR := ./lib_linear_reg/srcs
 SRC := $(SRC_DIR)/train.c
-SRC := $(SRC_DIR)/matrix.c
+SRC += $(SRC_DIR)/matrix.c
+SRC += $(SRC_DIR)/matrix_multiplication.c
 
 OBJ_DIR := ./lib_linear_reg/obj
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

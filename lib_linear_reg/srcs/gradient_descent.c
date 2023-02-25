@@ -6,7 +6,7 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 15:33:05 by cnysten           #+#    #+#             */
-/*   Updated: 2023/02/26 00:09:47 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/02/26 00:48:38 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 #include "matrix.h"
 #include "gradient.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-static void	gradient_print(t_gradient gradient)
-{
-	printf("dw: %f\ndb: %f\n", gradient.dw, gradient.db);
-}
+/* static void	gradient_print(t_gradient gradient) */
+/* { */
+/* 	printf("dw: %f\ndb: %f\n", gradient.dw, gradient.db); */
+/* } */
 
 static t_gd_result	descend(t_gd_params params, t_gd_result result)
 {
@@ -32,10 +34,10 @@ static t_gd_result	descend(t_gd_params params, t_gd_result result)
 		.y_vals = params.y_vals
 	};
 	gradient = calc_gradient(gradient_params);
-	gradient_print(gradient);
+	/* gradient_print(gradient); */
 	result.w -= params.learning_rate * gradient.dw;
 	result.b -= params.learning_rate * gradient.db;
-	printf("w: %f\nb: %f\n", result.w, result.b);
+	/* printf("w: %f\nb: %f\n", result.w, result.b); */
 	return (result);
 }
 
@@ -53,3 +55,15 @@ t_gd_result	gradient_descent(t_gd_params params)
 	}
 	return (result);
 }
+
+t_gd_result	*gd_result_new(t_gd_result result)
+{
+	t_gd_result	*ptr;
+
+	ptr = malloc(sizeof (t_gd_result));
+	if (!ptr)
+		return (0);
+	memcpy(ptr, &result, sizeof (t_gd_result));
+	return (ptr);
+}
+

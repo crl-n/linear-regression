@@ -13,6 +13,7 @@ SRC += $(SRC_DIR)/matrix_multiplication.c
 SRC += $(SRC_DIR)/gradient_descent.c
 SRC += $(SRC_DIR)/gradient.c
 SRC += $(SRC_DIR)/mean_squared_error.c
+SRC += $(SRC_DIR)/predict.c
 
 OBJ_DIR := ./lib_linear_reg/obj
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 22:27:55 by cnysten           #+#    #+#             */
-/*   Updated: 2023/02/25 22:47:22 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/02/26 00:04:08 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_gd_params
 typedef struct s_gd_result
 {
 	float	w;
-	int		b;
+	float	b;
 }	t_gd_result;
 
 t_gd_result	gradient_descent(t_gd_params params);

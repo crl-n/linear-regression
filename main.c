@@ -6,22 +6,13 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:00:43 by cnysten           #+#    #+#             */
-/*   Updated: 2023/02/25 15:23:21 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/02/25 23:04:48 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "matrix.h"
-
-void	matrix_print(t_matrix *matrix)
-{
-	for (int i = 0; i < matrix->n_rows; i++)
-	{
-		for (int j = 0; j < matrix->n_cols; j++)
-			printf("%i ", matrix_get_val(matrix, i, j));
-		printf("\n");
-	}
-}
+#include "linear_regression.h"
 
 int	main(void)
 {
@@ -60,6 +51,13 @@ int	main(void)
 
 	t_matrix *product = matrix_dot_product(lhs, rhs);
 	matrix_print(product);
+
+	int	x[] = {1,2,3};
+	int	y[] = {4,5,6};
+
+	puts("\n");
+	train(x, 3, y, 3);
+
 
 	return (0);
 }

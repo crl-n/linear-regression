@@ -6,16 +6,36 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 15:33:05 by cnysten           #+#    #+#             */
-/*   Updated: 2023/02/25 22:39:13 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/02/26 00:09:47 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gradient_descent.h"
 #include "matrix.h"
+#include "gradient.h"
+#include <stdio.h>
+
+static void	gradient_print(t_gradient gradient)
+{
+	printf("dw: %f\ndb: %f\n", gradient.dw, gradient.db);
+}
 
 static t_gd_result	descend(t_gd_params params, t_gd_result result)
 {
-	(void) params;
+	t_gradient_params	gradient_params;
+	t_gradient			gradient;
+
+	gradient_params = (t_gradient_params){
+		.w = result.w,
+		.b = result.b,
+		.x_vals = params.x_vals,
+		.y_vals = params.y_vals
+	};
+	gradient = calc_gradient(gradient_params);
+	gradient_print(gradient);
+	result.w -= params.learning_rate * gradient.dw;
+	result.b -= params.learning_rate * gradient.db;
+	printf("w: %f\nb: %f\n", result.w, result.b);
 	return (result);
 }
 

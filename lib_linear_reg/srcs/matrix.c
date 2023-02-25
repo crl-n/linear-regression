@@ -6,7 +6,7 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:42:41 by cnysten           #+#    #+#             */
-/*   Updated: 2023/02/25 13:46:31 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/02/25 14:22:57 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,16 @@ int		matrix_get_val(t_matrix *matrix, int row, int col)
 
 	offset = matrix_calc_offset(matrix, row, col);
 	return (*(matrix->data + offset));
+}
+
+void	matrix_fill(t_matrix *matrix, int val)
+{
+	int	i;
+	
+	i = 0;
+	while (i < matrix->n_rows * matrix->n_cols)
+	{
+		*(matrix->data + (i * matrix->elem_size)) = val;
+		i++;
+	}
 }

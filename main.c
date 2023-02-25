@@ -6,7 +6,7 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:00:43 by cnysten           #+#    #+#             */
-/*   Updated: 2023/02/25 13:42:32 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/02/25 14:24:01 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(void)
 	matrix = matrix_new(4, 4, 16);
 	if (!matrix)
 		return (1);
+	matrix_fill(matrix, 6);
 	matrix_set_val(matrix, 2, 2, 42);
 	matrix_print(matrix);
 	return (0);

@@ -1,3 +1,5 @@
 __pycache__
 */obj
 lib_linear_reg.so
+*dSYM
+regress

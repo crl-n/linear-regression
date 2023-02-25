@@ -2,16 +2,18 @@ PURPLE := $(shell tput setaf 5)
 RESET := $(shell tput sgr0)
 
 NAME := lib_linear_reg.so
+CPROGRAM := regress
 CFLAGS := -Wall -Wextra -Werror
 INCL := -I./lib_linear_reg/includes
 
 SRC_DIR := ./lib_linear_reg/srcs
 SRC := $(SRC_DIR)/train.c
+SRC := $(SRC_DIR)/matrix.c
 
 OBJ_DIR := ./lib_linear_reg/obj
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-all: pre_build $(NAME)
+all: pre_build_library $(NAME) pre_build_cprogram $(CPROGRAM)
 
 debug: CFLAGS += -g
 debug: re
@@ -20,11 +22,17 @@ no_flags: re
 asan: CFLAGS = -fsanitize=address -g
 asan: re
 
-pre_build:
+pre_build_library:
 	$(info $(PURPLE)Compiling library...$(RESET))
+
+pre_build_cprogram:
+	$(info $(PURPLE)Compiling main C program...$(RESET))
 
 $(NAME): $(OBJ_DIR) $(OBJ)
 	$(CC) -fPIC -shared $(CFLAGS) $(OBJ) -o $@
+
+$(CPROGRAM): $(OBJ_DIR) $(OBJ)
+	$(CC) main.c $(CFLAGS) $(NAME) $(INCL) -o $@
 
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
@@ -37,6 +45,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf $(CPROGRAM)
 
 re: fclean all
 

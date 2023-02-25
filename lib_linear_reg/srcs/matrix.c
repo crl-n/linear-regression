@@ -6,13 +6,14 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:42:41 by cnysten           #+#    #+#             */
-/*   Updated: 2023/02/25 14:22:57 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/02/25 23:03:56 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
 #include <stdlib.h>
 #include <strings.h>
+#include <stdio.h>
 
 t_matrix	*matrix_new(int n_rows, int n_cols, int elem_size)
 {
@@ -30,7 +31,7 @@ t_matrix	*matrix_new(int n_rows, int n_cols, int elem_size)
 	return (matrix);	
 }
 
-int		matrix_calc_offset(t_matrix *matrix, int row, int col)
+int		matrix_calc_offset(const t_matrix *matrix, int row, int col)
 {
 	return ((row * matrix->n_cols * matrix->elem_size) + (col * matrix->elem_size));
 }
@@ -43,7 +44,7 @@ void	matrix_set_val(t_matrix *matrix, int row, int col, int val)
 	*(matrix->data + offset) = val;
 }
 
-int		matrix_get_val(t_matrix *matrix, int row, int col)
+int		matrix_get_val(const t_matrix *matrix, int row, int col)
 {
 	int	offset;
 
@@ -60,5 +61,32 @@ void	matrix_fill(t_matrix *matrix, int val)
 	{
 		*(matrix->data + (i * matrix->elem_size)) = val;
 		i++;
+	}
+}
+
+t_matrix	*matrix_from_int_array(int vals[], int len)
+{
+	t_matrix	*matrix;
+	int			i;
+
+	matrix = matrix_new(1, len, sizeof (float));
+	if (!matrix)
+		return (0);
+	i = 0;	
+	while (i < len)
+	{
+		matrix_set_val(matrix, 0, i, (float) vals[i]);
+		i++;
+	}
+	return (matrix);
+}
+
+void	matrix_print(t_matrix *matrix)
+{
+	for (int i = 0; i < matrix->n_rows; i++)
+	{
+		for (int j = 0; j < matrix->n_cols; j++)
+			printf("%i ", matrix_get_val(matrix, i, j));
+		printf("\n");
 	}
 }

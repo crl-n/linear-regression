@@ -6,7 +6,7 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 15:33:05 by cnysten           #+#    #+#             */
-/*   Updated: 2023/02/26 00:48:38 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/02/27 21:16:37 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static t_gd_result	descend(t_gd_params params, t_gd_result result)
 	gradient_params = (t_gradient_params){
 		.w = result.w,
 		.b = result.b,
-		.x_vals = params.x_vals,
-		.y_vals = params.y_vals
+		.x_vals = params.model.x_vals,
+		.y_vals = params.model.y_vals
 	};
 	gradient = calc_gradient(gradient_params);
 	/* gradient_print(gradient); */
@@ -55,15 +55,3 @@ t_gd_result	gradient_descent(t_gd_params params)
 	}
 	return (result);
 }
-
-t_gd_result	*gd_result_new(t_gd_result result)
-{
-	t_gd_result	*ptr;
-
-	ptr = malloc(sizeof (t_gd_result));
-	if (!ptr)
-		return (0);
-	memcpy(ptr, &result, sizeof (t_gd_result));
-	return (ptr);
-}
-

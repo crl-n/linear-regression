@@ -6,7 +6,7 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:00:43 by cnysten           #+#    #+#             */
-/*   Updated: 2023/02/26 00:20:31 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/02/27 21:29:07 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int	main(void)
 	t_matrix *product = matrix_dot_product(lhs, rhs);
 	matrix_print(product);
 
-	int	x[] = {1,2,3};
-	int	y[] = {10,20,30};
+	/* int	x[] = {1,2,3}; */
+	/* int	y[] = {10,20,30}; */
 
-	puts("\n");
-	train(x, 3, y, 3);
+	/* puts("\n"); */
+	/* fit(x, 3, y, 3); */
 
 
 	return (0);

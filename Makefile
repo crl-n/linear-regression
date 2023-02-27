@@ -12,8 +12,10 @@ SRC += $(SRC_DIR)/matrix.c
 SRC += $(SRC_DIR)/matrix_multiplication.c
 SRC += $(SRC_DIR)/gradient_descent.c
 SRC += $(SRC_DIR)/gradient.c
-SRC += $(SRC_DIR)/mean_squared_error.c
 SRC += $(SRC_DIR)/predict.c
+SRC += $(SRC_DIR)/performance.c
+SRC += $(SRC_DIR)/r2_score.c
+SRC += $(SRC_DIR)/mean_squared_error.c
 SRC += $(SRC_DIR)/memdup.c
 
 OBJ_DIR := ./lib_linear_reg/obj

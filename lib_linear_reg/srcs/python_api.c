@@ -6,12 +6,13 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 20:43:16 by cnysten           #+#    #+#             */
-/*   Updated: 2023/02/27 21:13:44 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/03/04 21:33:57 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linear_regression.h"
 #include "memdup.h"
+#include <stdlib.h>
 
 /* static void	print_array(int array[], size_t n) */
 /* { */
@@ -38,4 +39,9 @@ t_linear_model	*py_fit(int x_vals[], int x_len, int y_vals[], int y_len)
 	};
 	model = fit(model);
 	return (memdup((void *) &model, sizeof (t_linear_model)));
+}
+
+void	memfree(void *ptr)
+{
+	free(ptr);
 }

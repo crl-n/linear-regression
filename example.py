@@ -6,7 +6,8 @@ def main():
    model = LinearRegressionModel()
    x = list(range(0, 25))
    y = list(map(lambda value: value * 10, x))
-   model.train(x, y)
+   model.fit(x, y)
+   print(model)
    print(model.predict(21))
 
 if __name__ == "__main__":

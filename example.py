@@ -9,6 +9,7 @@ def main():
    model.fit(x, y)
    print(model)
    model.predict(21)
+   model.score()
 
 if __name__ == "__main__":
     main()

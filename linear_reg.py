@@ -19,7 +19,7 @@ class LinearRegressionModel:
         # Add check for if x is 2D or 1D
         XArray = c_int * len(x_values)
         YArray = c_int * len(y_values)
-        model = lib_linear_reg.fit(XArray(*x_values), len(x_values), YArray(*y_values), len(y_values))
+        model = lib_linear_reg.py_fit(XArray(*x_values), len(x_values), YArray(*y_values), len(y_values))
         print(x_values)
         print(y_values)
         # print("result in python -> w:", model.contents.w, "b:", model.contents.b)

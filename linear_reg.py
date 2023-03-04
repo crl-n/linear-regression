@@ -14,13 +14,15 @@ lib_linear_reg.predict.restype = c_float
 class LinearRegressionModel:
     T = Union[int, float]
     
+    # Take in either 2D or 1D x_values
     def train(self, x_values: List[T], y_values: List[T]) -> None:
+        # Add check for if x is 2D or 1D
         XArray = c_int * len(x_values)
         YArray = c_int * len(y_values)
         model = lib_linear_reg.fit(XArray(*x_values), len(x_values), YArray(*y_values), len(y_values))
         print(x_values)
         print(y_values)
-        print("result in python -> w:", model.contents.w, "b:", model.contents.b)
+        # print("result in python -> w:", model.contents.w, "b:", model.contents.b)
         # Free result
         # Convert c model to LinearRegressionModel
         # Return self?

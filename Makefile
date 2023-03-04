@@ -50,9 +50,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCL) -c $^ -o $@
 
 clean:
+	$(info $(PURPLE)Removing object files...$(RESET))
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
+	$(info $(PURPLE)Removing executable and library...$(RESET))
 	rm -rf $(NAME)
 	rm -rf $(CPROGRAM)
 

@@ -6,58 +6,31 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:00:43 by cnysten           #+#    #+#             */
-/*   Updated: 2023/02/27 21:29:07 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/03/04 21:13:52 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "matrix.h"
 #include "linear_regression.h"
+#include "linear_regression.h"
 
 int	main(void)
 {
-	t_matrix	*matrix;
+	t_linear_model	model;
+	t_matrix		*x_vals;
+	t_matrix		*y_vals;
 
-	matrix = matrix_new(4, 4, 4);
-	if (!matrix)
+	x_vals = matrix_from_int_array((int[]){1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 10);
+	if (!x_vals)
 		return (1);
-	matrix_fill(matrix, 6);
-	matrix_set_val(matrix, 2, 2, 42);
-	matrix_print(matrix);
-	matrix_fill(matrix, 1);
-	t_matrix *result = matrix_scalar_mult(matrix, 42);
-	puts("\n");
-	matrix_print(result);
-	puts("\n");
-
-	t_matrix *lhs = matrix_new(2, 3, 4);
-	matrix_set_val(lhs, 0, 0, 1);
-	matrix_set_val(lhs, 0, 1, 2);
-	matrix_set_val(lhs, 0, 2, 3);
-	matrix_set_val(lhs, 1, 0, 4);
-	matrix_set_val(lhs, 1, 1, 5);
-	matrix_set_val(lhs, 1, 2, 6);
-	t_matrix *rhs = matrix_new(3, 2, 4);
-	matrix_set_val(rhs, 0, 0, 7);
-	matrix_set_val(rhs, 0, 1, 8);
-	matrix_set_val(rhs, 1, 0, 9);
-	matrix_set_val(rhs, 1, 1, 10);
-	matrix_set_val(rhs, 2, 0, 11);
-	matrix_set_val(rhs, 2, 1, 12);
-	matrix_print(lhs);
-	puts("\n");
-	matrix_print(rhs);
-	puts("\n");
-
-	t_matrix *product = matrix_dot_product(lhs, rhs);
-	matrix_print(product);
-
-	/* int	x[] = {1,2,3}; */
-	/* int	y[] = {10,20,30}; */
-
-	/* puts("\n"); */
-	/* fit(x, 3, y, 3); */
-
-
+	y_vals = matrix_from_int_array((int[]){10, 20, 30, 40, 50, 60, 70, 80, 90, 100}, 10);
+	if (!y_vals)
+		return (1);
+	model = (t_linear_model){
+		.x_vals = x_vals,
+		.y_vals = y_vals
+	};
+	fit(model);
 	return (0);
 }

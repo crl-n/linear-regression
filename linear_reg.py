@@ -16,8 +16,9 @@ class C_PerformanceResult(Structure):
 # Return and argument type definitions for functions of the C library
 lib_linear_reg = CDLL("lib_linear_reg.so")
 lib_linear_reg.py_fit.restype = POINTER(C_LinearModel)
+lib_linear_reg.py_score.argtypes = (c_float, c_float, c_void_p, c_int, c_void_p, c_int)
 lib_linear_reg.py_score.restype = POINTER(C_PerformanceResult)
-lib_linear_reg.py_predict.argtypes = (c_float,)
+lib_linear_reg.py_predict.argtypes = (c_float, c_float, c_float)
 lib_linear_reg.py_predict.restype = c_float
 lib_linear_reg.py_memfree.argtypes = (c_void_p,)
 lib_linear_reg.py_memfree.restype = None
@@ -48,7 +49,7 @@ class LinearRegressionModel:
     def score(self) -> None:
         XArray = c_int * len(self.x_values)
         YArray = c_int * len(self.y_values)
-        c_performance_results = lib_linear_reg.py_score(XArray(*self.x_values), len(self.x_values), YArray(*self.y_values), len(self.y_values))
+        c_performance_results = lib_linear_reg.py_score(self.w, self.b, XArray(*self.x_values), len(self.x_values), YArray(*self.y_values), len(self.y_values))
         print(f"R2 Score: {c_performance_results.contents.r2_score}\n"
               f"Mean Squared Error (MSE): {c_performance_results.contents.mean_squared_error}\n"
               f"Mean Absolute Error (MAE): {c_performance_results.contents.mean_absolute_error}\n"
@@ -58,7 +59,7 @@ class LinearRegressionModel:
     def predict(self, val: T) -> float:
         if not isinstance(val, T):
             raise TypeError("LinearRegressionModel.predict() requires argument of type int | float")
-        prediction = lib_linear_reg.predict(val)
+        prediction = lib_linear_reg.py_predict(val, self.w, self.b)
         print(f"Prediction (x = {val}): y = {prediction}")
         return prediction
 

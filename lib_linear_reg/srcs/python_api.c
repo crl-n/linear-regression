@@ -6,7 +6,7 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 20:43:16 by cnysten           #+#    #+#             */
-/*   Updated: 2023/03/04 23:49:36 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/03/05 00:22:10 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_linear_model	*py_fit(int x_vals[], int x_len, int y_vals[], int y_len)
 	return (memdup((void *) &model, sizeof (t_linear_model)));
 }
 
-t_perf_result	*py_score(int x_vals[], int x_len, int y_vals[], int y_len, float w, float b)
+t_perf_result	*py_score(float w, float b, int x_vals[], int x_len, int y_vals[], int y_len)
 {
 	t_linear_model	model;
 	t_perf_result	result;
@@ -57,10 +57,9 @@ t_perf_result	*py_score(int x_vals[], int x_len, int y_vals[], int y_len, float 
 	return (memdup((void *) &result, sizeof (t_linear_model)));
 }
 
-float	py_predict(float value)
+float	py_predict(float x, float w, float b)
 {
-	(void) value;
-	return (42.0);
+	return (w * x + b);
 }
 
 void	py_memfree(void *ptr)

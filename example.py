@@ -8,7 +8,7 @@ def main():
    y = list(map(lambda value: value * 10, x))
    model.fit(x, y)
    print(model)
-   print(model.predict(21))
+   model.predict(21)
 
 if __name__ == "__main__":
     main()

@@ -10,9 +10,10 @@ class C_LinearModel(Structure):
 # Return and argument type definitions for functions of the C library
 lib_linear_reg = CDLL("lib_linear_reg.so")
 lib_linear_reg.py_fit.restype = POINTER(C_LinearModel)
-lib_linear_reg.predict.restype = c_float
-lib_linear_reg.memfree.argtypes = (c_void_p,)
-lib_linear_reg.memfree.restype = None
+lib_linear_reg.py_predict.argtypes = (c_float,)
+lib_linear_reg.py_predict.restype = c_float
+lib_linear_reg.py_memfree.argtypes = (c_void_p,)
+lib_linear_reg.py_memfree.restype = None
 
 # Type union for input to train() and predict()
 T = Union[int, float]
@@ -31,11 +32,11 @@ class LinearRegressionModel:
         c_model = lib_linear_reg.py_fit(XArray(*x_values), len(x_values), YArray(*y_values), len(y_values))
         self.w = c_model.contents.w
         self.b = c_model.contents.b
-        lib_linear_reg.memfree(c_model)
+        lib_linear_reg.py_memfree(c_model)
 
     def predict(self, val: T) -> float:
         prediction = lib_linear_reg.predict(val)
-        print(f"Prediction: {prediction}")
+        print(f"Prediction (x = {val}): y = {prediction}")
         return prediction
 
     def __str__(self):

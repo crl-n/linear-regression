@@ -6,7 +6,7 @@
 /*   By: cnysten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 20:43:16 by cnysten           #+#    #+#             */
-/*   Updated: 2023/03/04 21:33:57 by cnysten          ###   ########.fr       */
+/*   Updated: 2023/03/04 22:28:33 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,13 @@ t_linear_model	*py_fit(int x_vals[], int x_len, int y_vals[], int y_len)
 	return (memdup((void *) &model, sizeof (t_linear_model)));
 }
 
-void	memfree(void *ptr)
+float	py_predict(float value)
+{
+	(void) value;
+	return (42.0);
+}
+
+void	py_memfree(void *ptr)
 {
 	free(ptr);
 }

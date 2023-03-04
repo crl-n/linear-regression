@@ -26,6 +26,8 @@ class LinearRegressionModel:
     
     # Take in either 2D or 1D x_values
     def fit(self, x_values: List[T], y_values: List[T]) -> None:
+        if not all(isinstance(val, T) for val in x_values) or not all(isinstance(val, T) for val in y_values):
+            raise TypeError("LinearRegressionModel.fit() requires arguments of type List[int | float]")
         # Add check for if x is 2D or 1D
         XArray = c_int * len(x_values)
         YArray = c_int * len(y_values)
@@ -35,6 +37,8 @@ class LinearRegressionModel:
         lib_linear_reg.py_memfree(c_model)
 
     def predict(self, val: T) -> float:
+        if not isinstance(val, T):
+            raise TypeError("LinearRegressionModel.predict() requires argument of type int | float")
         prediction = lib_linear_reg.predict(val)
         print(f"Prediction (x = {val}): y = {prediction}")
         return prediction
